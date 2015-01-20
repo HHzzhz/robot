@@ -20,8 +20,9 @@ public class Executor {
     private static final Logger LOGGER = LoggerFactory.getLogger(Executor.class);
 
     public static String exec(String cmd) {
+        LOGGER.info("The cmd is " + cmd);
         List<String> result = Lists.newLinkedList();
-        Process process;
+        Process process = null;
         try {
             process = Runtime.getRuntime().exec(cmd);
             InputStreamReader ir = new InputStreamReader(process
@@ -39,6 +40,9 @@ public class Executor {
         } catch (InterruptedException e) {
             LOGGER.info("A error occurred  in wait for the process.");
             e.printStackTrace();
+        }finally {
+            if(process != null)
+                process.destroy();
         }
         return StringUtils.join(result, "\n");
     }
