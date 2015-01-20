@@ -1,0 +1,31 @@
+path: /usr/local/robot/script
+
+cmd:
+  auto-build: /bin/sh %s/auto_build.sh
+
+
+
+
+
+#===================================== ROBOT SETTING =======================================
+server:
+  adminMinThreads: 1
+  adminMaxThreads: 64
+  applicationConnectors:
+    - type: http
+      port: 20000
+  adminConnectors:
+    - type: http
+      port: 20001
+
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: /var/log/robot/robot.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: /var/log/robot/robot-%d.log
+      archivedFileCount: 5
+      timeZone: UTC
+      logFormat: # TODO
